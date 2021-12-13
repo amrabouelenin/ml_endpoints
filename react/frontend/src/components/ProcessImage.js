@@ -62,6 +62,8 @@ export const ProcessImage = ({  }) => {
     // setYoloX(false)
     // setRcnn(false)
     // setImage('')
+    setImagetoDetect('')
+    setDetectedImage('')
 
     // Prepare data to be send
     const uploadData = new FormData();
@@ -93,13 +95,7 @@ export const ProcessImage = ({  }) => {
     setImagetoDetect(apiServer + res['image_to_detect'])
     setDetectedImage(apiServer + res['detected_image_path']);
 
-    
- 
     console.log(apiServer + res['detected_image_path'])
-    
-    //const data = await res.json()
-
-    // setSuccess(false);
     console.log(res)
   };
 
@@ -156,53 +152,56 @@ export const ProcessImage = ({  }) => {
               </IconButton>
             </label>
           </div>
-          <Box sx={{ m: 1, position: 'relative' }}>
-            <Fab
-              aria-label="save"
-              color="primary"
-              sx={buttonSx}
-              onClick={handleProcessButtonClick}
-            >
-              {success ? <CheckIcon /> : <SaveIcon />}
-            </Fab>
-            {loading && (
-              <CircularProgress
-                size={68}
-                sx={{
-                  color: green[500],
-                  position: 'absolute',
-                  top: -6,
-                  left: -6,
-                  zIndex: 1,
-                }}
-              />
-            )}
-          </Box>
-          <Box sx={{ m: 1, position: 'relative' }}>
-            <Button
-              variant="contained"
-              sx={buttonSx}
-              disabled={loading}
-              onClick={handleProcessButtonClick}
-            >
-              Process
-            </Button>
-            {loading && (
-              <CircularProgress
-                size={24}
-                sx={{
-                  color: green[500],
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  marginTop: '-12px',
-                  marginLeft: '-12px',
-                }}
-              />
-            )}
-          </Box>
+  
         </Box>
       </form>
+      <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
+        <Box sx={{ m: 1, position: 'relative' }}>
+          <Fab
+            aria-label="save"
+            color="primary"
+            sx={buttonSx}
+            onClick={handleProcessButtonClick}
+          >
+            {success ? <CheckIcon /> : <SaveIcon />}
+          </Fab>
+          {loading && (
+            <CircularProgress
+              size={68}
+              sx={{
+                color: green[500],
+                position: 'absolute',
+                top: -6,
+                left: -6,
+                zIndex: 1,
+              }}
+            />
+          )}
+        </Box>
+        <Box sx={{ m: 1, position: 'relative' }}>
+          <Button
+            variant="contained"
+            sx={buttonSx}
+            disabled={loading}
+            onClick={handleProcessButtonClick}
+          >
+            Process
+          </Button>
+          {loading && (
+            <CircularProgress
+              size={24}
+              sx={{
+                color: green[500],
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: '-12px',
+                marginLeft: '-12px',
+              }}
+            />
+          )}
+        </Box>
+      </Box>
       <MlOutput detectedimage= {detectedimage} imagetodetect={imagetodetect}/>
     </>
   )
