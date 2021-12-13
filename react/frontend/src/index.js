@@ -15,7 +15,7 @@ const routing = (
 				<Route exact path="/" component={App} />
 			</Routes> */}
 			<App/>
-			<Footer />
+			{/* <Footer /> */}
 		</React.StrictMode>
 	</Router>
 );

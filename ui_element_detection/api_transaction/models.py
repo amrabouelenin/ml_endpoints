@@ -44,6 +44,8 @@ class Transaction(models.Model):
     # @todo define accuracy field mPA
     # @todo define code generated in pyQT
     # @todo define file to be detected
+    image_to_detect = models.FileField(blank=True, default='', upload_to='uploads/')
+    confidence = models.FloatField(default=0.25)
     # @todo define file after detection process
 
     # objects = models.Manager()  # default manager
