@@ -35,10 +35,13 @@ function Copyright() {
 const footers = [
 	{
 
-		description: ['Team', 'About'],
+		description: ['Team'],
 	},
 	{
-		description: ['Terms of use', 'Contact us'],
+		description: ['About'],
+	},
+	{
+		description: ['Contact'],
 	},
 ];
 
@@ -46,17 +49,19 @@ function Footer() {
 	const classes = useStyles();
 	return (
 		<React.Fragment>
+			
 			<Container maxWidth="md" component="footer" className={classes.footer}>
-				<Grid container spacing={4} justify="space-evenly">
-					{footers.map((footer) => (
-						<Grid item  key={footer.title}>
+			{/* <Box mt={5}>
+				<Grid container spacing={3} >
+					{footers.map((footer,i) => (
+						<Grid item  key={i}>
 							<Typography variant="h6" color="textPrimary" gutterBottom>
 								{footer.title}
 							</Typography>
 							<ul>
 								{footer.description.map((item) => (
 									<li key={item}>
-										<Link href="#" variant="subtitle1" color="textSecondary">
+										<Link href={item} variant="subtitle1" color="textSecondary">
 											{item}
 										</Link>
 									</li>
@@ -65,6 +70,7 @@ function Footer() {
 						</Grid>
 					))}
 				</Grid>
+				</Box> */}
 				<Box mt={5}>
 					<Copyright />
 				</Box>

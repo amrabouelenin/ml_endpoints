@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+.teamcard {
+  float:left;
+}
+/* .cards {
+  
+} */
+.menulink {
+  color:white;
+  text-decoration: none;
+}
+
+.homemenu {
+  text-decoration: none;
+  color: white;
+}
+.python {
+  text-align: left;
+}
+.copy_icon{
+  float: right;
+  right: 42px;
+  z-index: 100;
+}

@@ -1,7 +1,7 @@
 export const DetectedImage = ({detectedimage}) => {
   return (
     <div>
-      <img width={300} src={detectedimage}/>
+      <img alt='Detected UI' width={300} src={detectedimage}/>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState} from 'react'
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
@@ -12,9 +12,7 @@ import { styled } from '@mui/material/styles';
 import Checkbox from '@mui/material/Checkbox';
 import MlOutput from './MlOutput';
 
-
-
-export const ProcessImage = ({  }) => {
+export const ProcessImage = () => {
 
   // Define required constants for Ui Detector Form
   const [confidence, setConfidence] = useState('0.25')
@@ -24,11 +22,12 @@ export const ProcessImage = ({  }) => {
   const [uiimage, setImage ] = useState();
   const [detectedimage, setDetectedImage ] = useState();
   const [imagetodetect, setImagetoDetect ] = useState();
+  const [code_generated, setCodeGenerated] = useState('Code to be generated');
 
   // Process Button
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const timer = useRef();
+  // const timer = useRef();
   const buttonSx = {
     ...(success && {
       bgcolor: green[500],
@@ -38,11 +37,11 @@ export const ProcessImage = ({  }) => {
     }),
   };
   
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer.current);
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     clearTimeout(timer.current);
+  //   };
+  // }, []);
   const Input = styled('input')({
     display: 'none',
   });
@@ -55,13 +54,6 @@ export const ProcessImage = ({  }) => {
       return
     }
 
-    // onProcess({ confidence, yolov5, yoloX, rcnn, uiimage })
-
-    // setConfidence('')
-    // setYolov5(false)
-    // setYoloX(false)
-    // setRcnn(false)
-    // setImage('')
     setImagetoDetect('')
     setDetectedImage('')
 
@@ -77,7 +69,8 @@ export const ProcessImage = ({  }) => {
 
     console.log(uploadData)
 
-    var apiServer = 'http://127.0.0.1:8000/'
+    // Call Ui Element Detection service
+    var apiServer = 'http://192.168.56.101:8000/'
     var apiUrl = apiServer + 'api/v1/yolov5/detectuielements/'
 
     if (!loading) {
@@ -95,8 +88,16 @@ export const ProcessImage = ({  }) => {
     setImagetoDetect(apiServer + res['image_to_detect'])
     setDetectedImage(apiServer + res['detected_image_path']);
 
+    fetch(apiServer + res['code_generated']).then(getTextCode => getTextCode.text()).then((data) => {
+      setCodeGenerated(data)
+    })
+
+
     console.log(apiServer + res['detected_image_path'])
     console.log(res)
+    console.log(code_generated)
+
+    // Set the output code 
   };
 
   return (
@@ -139,7 +140,7 @@ export const ProcessImage = ({  }) => {
           <div className='form-control'>
             <label htmlFor="contained-button-file">
               <Input accept="image/*" id="contained-button-file"  type="file" onChange={(evt) => setImage(evt.target.files[0])} />
-              <Button variant="contained" component="span" onClick={(e)=>setSuccess(false)}>
+              <Button variant="contained" component="span" onClick={(e)=> { setSuccess(false); setCodeGenerated('Code to be generated.....')}}>
                 Upload
               </Button>
             </label>
@@ -202,7 +203,7 @@ export const ProcessImage = ({  }) => {
           )}
         </Box>
       </Box>
-      <MlOutput detectedimage= {detectedimage} imagetodetect={imagetodetect}/>
+      <MlOutput detectedimage= {detectedimage} imagetodetect={imagetodetect} code_generated={code_generated} />
     </>
   )
 }

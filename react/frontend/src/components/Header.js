@@ -1,38 +1,4 @@
-// import React from 'react';
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import Typography from '@material-ui/core/Typography';
-// import CssBaseline from '@material-ui/core/CssBaseline';
-// import { makeStyles } from '@material-ui/core/styles';
 
-// Const useStyles = makeStyles((theme) => ({
-// 	appBar: {
-// 		borderBottom: `1px solid ${theme.palette.divider}`,
-// 	},
-// }));
-
-// function Header() {
-// 	const classes = useStyles();
-// 	return (
-// 		<React.Fragment>
-// 			<CssBaseline />
-// 			<AppBar
-// 				position="static"
-// 				color="white"
-// 				elevation={0}
-// 				className={classes.appBar}
-// 			>
-// 				<Toolbar>
-// 					<Typography variant="h6" color="inherit" noWrap>
-// 						UI Element Detection
-// 					</Typography>
-// 				</Toolbar>
-// 			</AppBar>
-// 		</React.Fragment>
-// 	);
-// }
-
-// Export default Header;
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -42,32 +8,27 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import { Menu as MenuIcon } from "@material-ui/icons";
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom'
+
 
 const pages = ['Home', 'About', 'Team'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+
 
   return (
     <AppBar position="static">
@@ -113,7 +74,10 @@ const Header = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  
+                  <Link to={page === 'Home' ?  '/' : page}>
+                    <Typography textAlign="center">{page}</Typography> 
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -124,7 +88,8 @@ const Header = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            UI Element Detector
+            <Link className='homemenu' to='/'>UI Element Detector</Link>
+            
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -133,7 +98,9 @@ const Header = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                <Link className='menulink' to={page === 'Home' ?  '/' : page}>
+                  {page}
+                </Link>
               </Button>
             ))}
           </Box>
