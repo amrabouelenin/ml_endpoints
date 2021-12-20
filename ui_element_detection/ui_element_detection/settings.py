@@ -140,7 +140,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
-    "http://92.168.56.101:3000"
+    "http://192.168.56.101:3000",
+    "http://localhost:3000"
 ]
 
 # Path to media files
@@ -151,3 +152,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_DIR = BASE_DIR  / 'static'
 
 DEBUG = True
+
+YOLOV5_WEIGHTS = '/var/www/html/ml_endpoints/ui_element_detection/api_yolov5/yolov5/best.pt'
+
+# Uploaded Images Path
+
+IMAGES_UPLOAD_PATH = 'uploads/'
