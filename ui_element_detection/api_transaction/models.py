@@ -22,6 +22,11 @@ class Transaction(models.Model):
         ('faster_rcnn', 'Faster - RCNN'),
     )
 
+    # code export types
+    types = (
+        ('html', 'HTML'),
+        ('pyqt', 'PyQt'),
+    )
     # Text containing list of ui elememnt detected
     detected_uielements = models.TextField(null=True)
 
@@ -37,6 +42,9 @@ class Transaction(models.Model):
     
     status = models.CharField(
         max_length=11, choices=options, default='successfull')
+    
+    type = models.CharField(
+        max_length=11, choices=types, default='html')
     
     ml_models = models.CharField(
         max_length=11, choices=models_options, default='yolov5')

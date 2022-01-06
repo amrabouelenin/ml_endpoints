@@ -79,7 +79,7 @@ def write_code_for_button(type, file_name, element_id,x,y,w,h):
                 <input type="submit" style="
                     position: absolute;z-index: 1;
                     width:""" + f' {w}px;height: {h}px;left: {x}px;top: {y}px;' + """
-            ">
+                ">
             """)
 
 def write_code_for_textbox(type, file_name, element_id,x,y,w,h):
@@ -94,7 +94,7 @@ def write_code_for_textbox(type, file_name, element_id,x,y,w,h):
                 <input style="
                     position: absolute;z-index: 1;
                     width:""" + f' {w}px;height: {h}px;left: {x}px;top: {y}px;' + """
-            ">
+                ">
             """)
 
 def write_code_for_listitem(type, file_name, element_id,x,y,w,h):
@@ -110,11 +110,8 @@ def write_code_for_listitem(type, file_name, element_id,x,y,w,h):
                     position: absolute;z-index: 1;
                     width:""" + f' {w}px;height: {h}px;left: {x}px;top: {y}px;' + """
             ">
-            <li >List Item</li>
+                <li >List Item</li>
             </ul>
-                <input style="
-                    
-            ">
             """)
 
 def write_code_for_label(type, file_name, element_id,x,y,w,h):
@@ -130,7 +127,8 @@ def write_code_for_label(type, file_name, element_id,x,y,w,h):
                     position: absolute;background-color: red;
                     ont-size: 10px;
                     width:""" + f' {w}px;height: {h}px;left: {x}px;top: {y}px;' + """
-            ">Textplaceholder</span>
+                    ">Textplaceholder
+                </span>
             """)
 
 def write_code_for_checkbox(type,file_name, element_id,x,y,w,h):
@@ -146,7 +144,23 @@ def write_code_for_checkbox(type,file_name, element_id,x,y,w,h):
                 <input type="checkbox" style="
                     position: absolute;z-index: 1;
                     width:""" + f' {w}px;height: {h}px;left: {x}px;top: {y}px;' + """
-            ">
+                ">
+            """)
+
+def write_code_for_datepicker(type,file_name, element_id,x,y,w,h):
+    if type== 'pyqt':
+
+        with open(file_name, 'a') as generated_code:
+            generated_code.write('# Generate Checkbox Code\n')
+            generated_code.write(f'\tchecktbox{element_id} = QCheckBox(widget)\n')
+            generated_code.write(f"\tchecktbox{element_id}.setGeometry({x}, {y}, {w}, {h})\n")
+    else:
+        with open(file_name, 'a') as generated_code:
+            generated_code.write("""
+                <input type="date" style="
+                    position: absolute;z-index: 1;
+                    width:""" + f' {w}px;height: {h}px;left: {x}px;top: {y}px;' + """
+                ">
             """)
 
 def write_code_for_radiobutton(type, file_name, element_id,x,y,w,h):
@@ -161,7 +175,7 @@ def write_code_for_radiobutton(type, file_name, element_id,x,y,w,h):
                 <input type="radio" style="
                     position: absolute;z-index: 1;
                     width:""" + f' {w}px;height: {h}px;left: {x}px;top: {y}px;' + """
-            ">
+                ">
             """)
 
 def write_code_for_image(type, file_name, element_id,x,y,w,h):
@@ -192,54 +206,54 @@ def write_code_for_switcher(type, file_name, element_id,x,y,w,h):
         with open(file_name, 'a') as generated_code:
             generated_code.write("""
             <style>
-            .switch {
-                position: absolute;
-                display: inline-block;
-                width: 40px;
-                height: 23px;
-                left:""" + f"{x}px;" + f"top: {y}px;" + """
-            }
-            .slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #ccc;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 15px;
-                width: 15px;
-                left: 4px;
-                top: 4px;
-                background-color: white;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
-            input:checked + .slider {
-                background-color: #2196F3;
-            }
-            input:focus + .slider {
-                box-shadow: 0 0 1px #2196F3;
-            }
-            input:checked + .slider:before {
-                -webkit-transform: translateX(18px);
-                -ms-transform: translateX(18px);
-                transform: translateX(18px);
-            }
-            /* Rounded sliders */
-            .slider.round {
-                border-radius: 34px;
-            }
+                .switch {
+                    position: absolute;
+                    display: inline-block;
+                    width: 40px;
+                    height: 23px;
+                    left:""" + f"{x}px;" + f"top: {y}px;" + """
+                }
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #ccc;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+                }
+                .slider:before {
+                    position: absolute;
+                    content: "";
+                    height: 15px;
+                    width: 15px;
+                    left: 4px;
+                    top: 4px;
+                    background-color: white;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+                }
+                input:checked + .slider {
+                    background-color: #2196F3;
+                }
+                input:focus + .slider {
+                    box-shadow: 0 0 1px #2196F3;
+                }
+                input:checked + .slider:before {
+                    -webkit-transform: translateX(18px);
+                    -ms-transform: translateX(18px);
+                    transform: translateX(18px);
+                }
+                /* Rounded sliders */
+                .slider.round {
+                    border-radius: 34px;
+                }
 
-            .slider.round:before {
-                border-radius: 50%;
-            }
+                .slider.round:before {
+                    border-radius: 50%;
+                }
             </style>
             <label class="switch">
                 <input type="checkbox">
@@ -294,7 +308,7 @@ def generate_code(bboxes,exp_number, type ):
         elif cls == 'Checkbox':
             write_code_for_checkbox(type,file_name, element_id, x,y,w,h)
         elif cls == 'Date Picker':
-            pass
+            write_code_for_datepicker(type,file_name, element_id, x,y,w,h)
         elif cls == 'Input':
             write_code_for_textbox(type,file_name, element_id, x,y,w,h)
         elif cls == 'List Item':
@@ -341,7 +355,6 @@ def yolov5_run(transaction, confidence):
     return detected_image_path, image_to_detect_path, exp_number
 
 
-
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
@@ -364,11 +377,11 @@ class TransactionViewSet(viewsets.ModelViewSet):
         # bound box path
         file_name = str(transaction.image_to_detect).split(settings.IMAGES_UPLOAD_PATH)
         file_name = file_name[1].split('.')
-        bbox_txt_path = f'media/images/exp{exp_number}/labels/{file_name[0]}.txt'
+
         bbox_json_path = f'media/images/exp{exp_number}/labels/{file_name[0]}.json'
 
         
-        # read generate bboxes file
+        # Read generate bboxes file
         # bboxfile = open(bbox_txt_path, 'r')
         bboxfile = open(bbox_json_path)
         #bboxes= bboxfile.readlines()

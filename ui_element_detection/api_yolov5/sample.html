@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<div style="
+    width: 200px;
+    height: 400px;
+    background-color: red;
+">
+
+<input style="
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 10px;
+    top: 12px;
+    z-index: 1;
+">
+<input type="submit" style="
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 20px;
+    top: 20px;
+    z-index: 1;
+">
+
+<input type="radio" style="
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 40px;
+    top: 20px;
+    z-index: 1;
+">
+<input type="checkbox" style="
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 60px;
+    top: 70px;
+    z-index: 1;
+">
+<img src='https://image.shutterstock.com/z/stock-vector-no-image-available-icon-template-for-no-image-or-picture-coming-soon-vector-illustration-isolated-1036735678.jpg' style="
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 40px;
+    top: 20px;
+">
+<ul style="
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 100px;
+    top: 180px;
+    z-index: 1;
+">
+<li >Coffee</li>
+</ul>
+<span  style="
+    position: absolute;
+    width: 100px;
+    height: 10px;
+    left: 100px;
+    top: 190px;
+    background-color: blue;
+    z-index: 1;
+    font-size: 10px;
+">hello</span>
+
+
+
+<style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+
+
+
+
+<label class="switch">
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label>
+</div>
+</html>
