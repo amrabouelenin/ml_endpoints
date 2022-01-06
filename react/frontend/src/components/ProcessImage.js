@@ -9,21 +9,36 @@ import { green } from '@mui/material/colors';
 import CheckIcon from '@mui/icons-material/Check';
 import SaveIcon from '@mui/icons-material/Save';
 import { styled } from '@mui/material/styles';
-import Checkbox from '@mui/material/Checkbox';
 import MlOutput from './MlOutput';
+import * as React from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 export const ProcessImage = () => {
 
   // Define required constants for Ui Detector Form
   const [confidence, setConfidence] = useState('0.25')
-  const [yolov5, setYolov5] = useState(false)
-  const [yoloX, setYoloX] = useState(false)
-  const [rcnn, setRcnn] = useState(false)
+
   const [uiimage, setImage ] = useState();
   const [detectedimage, setDetectedImage ] = useState();
   const [imagetodetect, setImagetoDetect ] = useState();
   const [code_generated, setCodeGenerated] = useState('Code to be generated');
+  const [codetype, setType] = React.useState('html');
+  const [modeltype, setModelType] = React.useState('yolov5');
 
+  const handleChange = (event) => {
+    setType(event.target.value);
+  };
+
+  const handleModelChange = (event) => {
+    setModelType(event.target.value);
+  };
+
+  const handleConfidenceChange = (event) => {
+    setConfidence(event.target.value);
+  };
   // Process Button
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -37,11 +52,7 @@ export const ProcessImage = () => {
     }),
   };
   
-  // useEffect(() => {
-  //   return () => {
-  //     clearTimeout(timer.current);
-  //   };
-  // }, []);
+
   const Input = styled('input')({
     display: 'none',
   });
@@ -60,11 +71,12 @@ export const ProcessImage = () => {
     // Prepare data to be send
     const uploadData = new FormData();
     uploadData.append('author', '1');
-    uploadData.append('description', 'Amro Test');
-    uploadData.append('ml_models', 'yolov5');
+    uploadData.append('description', 'Detection of user interface screen shot');
+    uploadData.append('ml_models', modeltype);
     uploadData.append('status', 'successfull');
     uploadData.append('image_to_detect', uiimage);
     uploadData.append('confidence', confidence);
+    uploadData.append('type', codetype);
     
 
     console.log(uploadData)
@@ -104,39 +116,58 @@ export const ProcessImage = () => {
     <>
       <form className='upload-form'>
         <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
-          <div className='form-control'>
-            <label>Model Confidence</label>
-            <input
-              type='text'
-              placeholder='i.e 0.25'
+
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-standard-label">Model Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              value={modeltype}
+              onChange={handleModelChange}
+              label="modelType"
+            >
+              <MenuItem value={'yolov5'}>Yolov5</MenuItem>
+              <MenuItem value={'yolovx'}>YolovX</MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-standard-label">Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              value={codetype}
+              onChange={handleChange}
+              label="Type"
+            >
+              <MenuItem value={'html'}>HTML</MenuItem>
+              <MenuItem value={'pyqt'}>PyQt</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-standard-label">Confidence</InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
               value={confidence}
-              onChange={(e) => setConfidence(e.target.value)}
-            />
-          </div>
-          <div className='form-control form-control-check'>
-            <label>Yolov5</label>
-            <Checkbox 
-              checked={yolov5}
-              value={yolov5}
-              onChange={(e) => setYolov5(e.currentTarget.checked)}
-            />
-          </div>
-          <div className='form-control form-control-check'>
-            <label>YoloX</label>
-            <Checkbox 
-              checked={yoloX}
-              value={yoloX}
-              onChange={(e) => setYoloX(e.currentTarget.checked)}
-            />
-          </div>
-          <div className='form-control form-control-check'>
-            <label>R-CNN</label>
-            <Checkbox 
-              checked={rcnn}
-              value={rcnn}
-              onChange={(e) => setRcnn(e.currentTarget.checked)}
-            />
-          </div>
+              onChange={handleConfidenceChange}
+              label="ModelConfidence"
+            >
+              <MenuItem value={'0.25'}>0.25</MenuItem>
+              <MenuItem value={'0.3'}>0.3</MenuItem>
+              <MenuItem value={'0.4'}>0.4</MenuItem>
+              <MenuItem value={'0.45'}>0.45</MenuItem>
+              <MenuItem value={'0.5'}>0.5</MenuItem>
+              <MenuItem value={'0.65'}>0.65</MenuItem>
+              <MenuItem value={'0.7'}>0.7</MenuItem>
+              <MenuItem value={'0.75'}>0.75</MenuItem>
+              <MenuItem value={'0.8'}>0.8</MenuItem>
+              <MenuItem value={'0.85'}>0.85</MenuItem>
+              <MenuItem value={'0.9'}>0.9</MenuItem>
+              <MenuItem value={'0.95'}>0.95</MenuItem>
+
+            </Select>
+          </FormControl>
           <div className='form-control'>
             <label htmlFor="contained-button-file">
               <Input accept="image/*" id="contained-button-file"  type="file" onChange={(evt) => setImage(evt.target.files[0])} />
@@ -155,6 +186,7 @@ export const ProcessImage = () => {
           </div>
   
         </Box>
+
       </form>
       <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
         <Box sx={{ m: 1, position: 'relative' }}>
