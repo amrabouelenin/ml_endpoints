@@ -82,8 +82,12 @@ export const ProcessImage = () => {
     console.log(uploadData)
 
     // Call Ui Element Detection service
-    var apiServer = 'http://192.168.56.101:8000/'
+    var apiServer = 'http://167.71.9.235:8000/'
     var apiUrl = apiServer + 'api/v1/yolov5/detectuielements/'
+    if (modeltype == 'yolovx') {
+      apiServer = 'http://srv09.mikr.us:30373/'
+      apiUrl = apiServer + ''
+    }
 
     if (!loading) {
       setSuccess(false);
@@ -100,7 +104,11 @@ export const ProcessImage = () => {
     setImagetoDetect(apiServer + res['image_to_detect'])
     setDetectedImage(apiServer + res['detected_image_path']);
 
-    fetch(apiServer + res['code_generated']).then(getTextCode => getTextCode.text()).then((data) => {
+    var generated_code_url = apiServer + res['code_generated']
+    if (modeltype == 'yolovx') {
+      generated_code_url = res['code_generated']
+    }
+    fetch(generated_code_url).then(getTextCode => getTextCode.text()).then((data) => {
       setCodeGenerated(data)
     })
 
